@@ -1,18 +1,7 @@
 var Controller = require('../controller');
 
-function calculateNthFibonacci(n) {
-  if (n <= 0) {
-    return 0;
-  }
-  if (n === 1) {
-    return 1;
-  }
-  return calculateNthFibonacci(n - 2) + calculateNthFibonacci(n - 1);
-}
-
 function CommandController() {
   this.count = this.count.bind(this);
-  this.fibonacci = this.fibonacci.bind(this);
   this.shout = this.shout.bind(this);
   this.delay = this.delay.bind(this);
   this.divisible = this.divisible.bind(this);
@@ -54,12 +43,9 @@ CommandController.prototype.dispatch = function() {
     case 'delay':
       fn = this.delay;
       break;
-    case 'fibonacci':
-      fn = this.fibonacci;
-      // Oops, forgot to add a break; statement
     case 'count':
       fn = this.count;
-      break;
+      // Oops, forgot to add a break; statement
     case 'divisible':
       fn = this.divisible;
       break;
@@ -67,21 +53,16 @@ CommandController.prototype.dispatch = function() {
     default:
       fn = this.shout;
       break;
-      break;
   }
 
-  return fn();
+  fn();
 };
 
 CommandController.prototype.delay = function() {
   var _this = this;
   return setTimeout(function() {
-    return _this.res.send("Waited " + _this.number + "ms");
+    _this.res.send("Waited " + _this.number + "ms");
   }, this.number);
-};
-
-CommandController.prototype.fibonacci = function() {
-  return this.res.send("" + this.number + "th Fibonacci number is: " + calculateNthFibonacci(this.number));
 };
 
 CommandController.prototype.count = function() {
@@ -89,7 +70,7 @@ CommandController.prototype.count = function() {
   for (var i = 1; i < this.number; i++) { // Oops...
     numbers.push(i);
   }
-  return this.res.send(numbers.join(", "));
+  this.res.send(numbers.join(", "));
 };
 
 CommandController.prototype.divisible = function() {
@@ -99,11 +80,11 @@ CommandController.prototype.divisible = function() {
       numbers.push(i);
     }
   }
-  return this.res.send("Numbers from 1 to 1000 divisible by " + this.number + ": " + numbers.join(", "));
+  this.res.send("Numbers from 1 to 1000 divisible by " + this.number + ": " + numbers.join(", "));
 };
 
 CommandController.prototype.shout = function() {
-  return this.res.send(this.string.toUpperCase());
+  this.res.send(this.string.toUpperCase());
 };
 
 module.exports = CommandController;
