@@ -1,7 +1,6 @@
-var _ = require('lodash');
 var Controller = require('../controller');
 
-var calculateNthFibonacci = _.memoize(function(n) {
+function calculateNthFibonacci(n) {
   if (n <= 0) {
     return 0;
   }
@@ -9,10 +8,14 @@ var calculateNthFibonacci = _.memoize(function(n) {
     return 1;
   }
   return calculateNthFibonacci(n - 2) + calculateNthFibonacci(n - 1);
-});
+}
 
 function CommandController() {
-  _.bindAll(this);
+  this.count = this.count.bind(this);
+  this.fibonacci = this.fibonacci.bind(this);
+  this.shout = this.shout.bind(this);
+  this.delay = this.delay.bind(this);
+  this.divisible = this.divisible.bind(this);
   // Call parent's constructor
   Controller.apply(this, arguments);
   return this;
