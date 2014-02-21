@@ -30,9 +30,9 @@ CommandController.prototype.dispatch = function() {
   if (!this.string || !this.string.length) {
     this.string = "Hello World";
   }
-  this.number = parseInt(this.req.params.arg || "10", 10);
+  this.number = parseInt(this.req.params.arg, 10);
   if (!isFinite(this.number)) {
-    this.number = 10;
+    this.number = Math.ceil(Math.random() * 20);
   }
   if (this.number < 1) {
     this.number = 1;
