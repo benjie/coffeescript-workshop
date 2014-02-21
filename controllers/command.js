@@ -13,10 +13,17 @@ var calculateNth = _.memoize(function(n) {
 
 function CommandController() {
   _.bindAll(this);
-  return Controller.apply(this, arguments);
+  // Call parent's constructor
+  Controller.apply(this, arguments);
+  return this;
 }
 
-CommandController.prototype = new Controller();
+// Inherit from Controller
+(function(){
+  function noop(){}
+  noop.prototype = Controller.prototype;
+  CommandController.prototype = new noop()
+})();
 
 // Copy over middleware, etc
 for (var k in Controller) {
@@ -38,6 +45,7 @@ CommandController.prototype.dispatch = function() {
   if (this.number < 0) {
     this.number = 0;
   }
+
   var fn = null;
   switch (this.command) {
     case 'delay':
@@ -66,19 +74,19 @@ CommandController.prototype.delay = function() {
 };
 
 CommandController.prototype.shout = function() {
-  return this.res.send("" + (this.string.toUpperCase()));
+  return this.res.send(this.string.toUpperCase());
 };
 
 CommandController.prototype.count = function() {
   var numbers = [];
-  for (var i = 1; i < this.number; i++) {
+  for (var i = 1; i < this.number; i++) { // Oops...
     numbers.push(i);
   }
   return this.res.send(numbers.join(", "));
 };
 
 CommandController.prototype.fibonacci = function() {
-  return this.res.send("" + this.number + "th Fibonacci number is: " + (calculateNth(this.number)));
+  return this.res.send("" + this.number + "th Fibonacci number is: " + calculateNth(this.number));
 };
 
 module.exports = CommandController;
