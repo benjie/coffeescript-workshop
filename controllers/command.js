@@ -60,7 +60,7 @@ CommandController.prototype.dispatch = function() {
 
 CommandController.prototype.delay = function() {
   var _this = this;
-  return setTimeout(function() {
+  setTimeout(function() {
     _this.res.send("Waited " + _this.number + "ms");
   }, this.number);
 };
