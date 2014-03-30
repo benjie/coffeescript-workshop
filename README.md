@@ -46,10 +46,17 @@ onto your Terminal icon.
 
 ### Linux
 
-DON'T install Node 0.6.x from your repos, it's ridiculously out of date.
+DON'T install Node 0.6.x from your repos, it's ridiculously out of date!
 
-Simplest is just to download the [Node Linux Binaries][] and add them to
-your `$PATH`.
+Simplest is to use [nvm]() to download and manage your nodejs
+
+Here's two ... one-liners for yo terminal, so open it up...
+
+    wget -qO- https://raw.github.com/creationix/nvm/v0.4.0/install.sh | sh
+
+now close your terminal ... and open it again (yes, really. reopen it)
+
+    nvm install 0.10 && nvm alias default 0.10 && echo "My nodejs should be installed, here's the version:" && node -v
 
 You're too damn cool for me to have to tell to have a terminal open,
 right? Probably the only reason you're running X is so you can give your
