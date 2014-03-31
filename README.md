@@ -48,7 +48,7 @@ onto your Terminal icon.
 
 DON'T install Node 0.6.x from your repos, it's ridiculously out of date!
 
-Simplest is to use [nvm]() to download and manage your nodejs
+Simplest is to use [nvm](https://github.com/creationix/nvm) to download and manage your nodejs
 
 Here's two ... one-liners for yo terminal, so open it up...
 
